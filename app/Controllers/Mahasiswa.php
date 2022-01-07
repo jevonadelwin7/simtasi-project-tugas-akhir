@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\JadwalModel;
 
 class Mahasiswa extends BaseController
 {
@@ -208,6 +209,8 @@ class Mahasiswa extends BaseController
             if ($file->getError() == 4) {
                 $data = [
                     'pesan_mahasiswa' => $this->request->getPost('komentar'),
+                    'status_bg' => 'secondary',
+                    'status' => 'menunggu'
                 ];
                 $this->UsersModel->update_daftar($data, $id_pendaftaran);
                 return redirect()->to(base_url('mahasiswa/pendaftaran_seminar'));
@@ -372,10 +375,12 @@ class Mahasiswa extends BaseController
             'judul' => $this->request->getPost('judul_proposal'),
             'tentang_judul' => $this->request->getPost('tentang_judul'),
             'pesan' => $this->request->getPost('pesan'),
-            'jenis' => 'proposal'
+            'jenis' => 'proposal',
+            'status' => 'menunggu',
+            'status_class' => 'secondary'
         ];
         $this->UsersModel->insert_data($data);
-        return redirect()->to(base_url('mahasiswa'));
+        return redirect()->to(base_url('mahasiswa/bimbingan'));
     }
     public function insert_request_ta()
     {
@@ -555,16 +560,20 @@ class Mahasiswa extends BaseController
     }
     public function jadwal_seminar()
     {
-
+        $page = \Config\Services::pager();
+        $jadwal = new JadwalModel();
         $userModel = new \App\Models\UsersModel();
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $idmhs = $userInfo['id'];
         if ($userInfo['role_id'] == 3) {
             $data = [
-                'title' => 'Daftar Dosen',
+                'title' => 'Jadwal Seminar',
                 'isi' => 'mahasiswa/jadwal_seminar',
-                'judul' => 'Daftar Dosen',
+                'judul' => 'Jadwal Seminar',
+                'jadwal' => $jadwal->where('jenis', 'proposal')->paginate(10),
+                'halaman' => $jadwal->pager,
+                //'jadwal' => $this->UsersModel->get_jadwal(),
                 'userInfo' => $userInfo
             ];
             echo view('layout/template', $data);
@@ -574,16 +583,19 @@ class Mahasiswa extends BaseController
     }
     public function jadwal_sidang()
     {
-
+        $page = \Config\Services::pager();
+        $jadwal = new JadwalModel();
         $userModel = new \App\Models\UsersModel();
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $idmhs = $userInfo['id'];
         if ($userInfo['role_id'] == 3) {
             $data = [
-                'title' => 'Daftar Dosen',
+                'title' => 'Jadwal Sidang',
                 'isi' => 'mahasiswa/jadwal_sidang',
-                'judul' => 'Daftar Dosen',
+                'judul' => 'Jadwal Sidang',
+                'jadwal' => $jadwal->where('jenis', 'skripsi')->paginate(10),
+                'halaman' => $jadwal->pager,
                 'userInfo' => $userInfo
             ];
             echo view('layout/template', $data);

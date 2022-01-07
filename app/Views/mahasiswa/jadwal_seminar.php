@@ -1,91 +1,108 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Jadwal Seminar Proposal</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Projects</li>
-                    </ol>
+                    <h1>Jadwal Seminar</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    <!-- Default box -->
-    <div class="card">
-        <div class="card-header bg-success">
-            <h3 class="card-title">Seminar Proposal</h3>
 
-            <div class="card-tools">
+    <!-- Main content -->
+    <section class="content">
 
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"></h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="bg-secondary text-center">
+                                No
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Nama Mahasiswa
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Judul
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Penguji
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Hari
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Bulan
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Tahun
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Jam
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Ruangan / Link
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 1;
+                        foreach ($jadwal as $key => $value) { ?>
+                            <tr>
+                                <td class="text-center">
+                                    <?= $i++; ?>.
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['mahasiswa']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['judul']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['penguji']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['hari']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['bulan']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['tahun']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['jam']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['mahasiswa']; ?>
+                                </td>
+                            </tr>
+                        <?php  } ?>
+                    </tbody>
+                </table>
+                <div class="text-cente mx-auto pl-2 pt-1 font-weight-bolder"><?= $halaman->Links() ?></div>
             </div>
         </div>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th>
-                            Nama Mahasiswa
-                        </th>
-                        <th>
-                            Dosen Penguji
-                        </th>
-                        <th>
-                            Judul Proposal
-                        </th>
-                        <th>
-                            Hari
-                        </th>
-                        <th>
-                            Jam
-                        </th>
-                        <th>
-                            Tanggal
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    <tr>
-                        <td>
-                            <!----> jevon adelwin
-                        </td>
-                        <td>
-                            <!---->jevon adelwin
-                        </td>
-                        <td>
-                            <!---->jevon adelwin jevon adelwin jevon adelwin jevon adelwin jevon adelwin jevon adelwin jevon adelwin jevon adelwin jevon adelwin
-                        </td>
-                        <td>
-                            <!---->jevon adelwin
-                        </td>
-                        <td>
-                            <!---->jevon adelwin
-                        </td>
-                        <td>
-                            <!---->jevon adelwin
-                        </td>
-                    </tr>
 
-                </tbody>
-            </table>
-        </div>
-        <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
+</section>
+<!-- /.content -->
+</div>

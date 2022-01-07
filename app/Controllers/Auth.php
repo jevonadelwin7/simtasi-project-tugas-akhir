@@ -92,9 +92,9 @@ class Auth  extends BaseController
             $userModel = new \App\Models\UsersModel();
             $query = $userModel->insert($values);
             if (!$query) {
-                return redirect()->back()->with('fail', 'something went wrong');
+                return redirect()->to('auth/register')->with('success', 'Berhasil Mendaftarkan Akun');
             } else {
-                return redirect()->to('auth');
+                return redirect()->back()->with('fail', 'Gagal mendaftarkan Akun!');
             }
         }
     }
@@ -244,9 +244,10 @@ class Auth  extends BaseController
             ],
 
         ]);
-
         if (!$validation) {
-            return view('admin/tambah_dosen', ['validation' => $this->validator]);
+            // return view('admin/tambah_dosen', ['validation' => $this->validator]);
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput();
         } else {
             $no = $this->request->getPost('no');
             $nama_user = $this->request->getPost('nama_user');
@@ -266,9 +267,11 @@ class Auth  extends BaseController
             $userModel = new \App\Models\DosenModel();
             $query = $userModel->insert($values);
             if (!$query) {
-                return redirect()->back()->with('fail', 'something went wrong');
+                // return redirect()->back()->with('fail', 'something went wrong');
+                return redirect()->to('admin/tambah_dosen')->with('success', 'Berhasil Mendaftarkan Dosen');
             } else {
-                return redirect()->to('admin/tambah_dosen')->with('success', 'berhasil mendaftar');
+                return redirect()->back()->with('fail', 'something went wrong');
+                //return redirect()->to('admin/tambah_dosen')->with('success', 'berhasil mendaftar');
             }
         }
     }

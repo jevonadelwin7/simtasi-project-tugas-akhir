@@ -60,17 +60,21 @@ class Dosen extends BaseController
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $id_dosen = $userInfo['id'];
-        if ($userInfo['role_id'] == 2 || 1) {
-            $data = [
-                'title' => 'Home',
-                'isi' => 'dosen/request_mhs',
-                'judul' => 'Request Mahasiswa',
-                'request' => $this->DosenModel->get_request($id_dosen),
-                'request_ta' => $this->DosenModel->get_request_ta($id_dosen),
-                'userInfo' => $userInfo
+        $data = [
+            'title' => 'Home',
+            'isi' => 'dosen/request_mhs',
+            'judul' => 'Request Mahasiswa',
+            'request' => $this->DosenModel->get_request($id_dosen),
+            'request_ta' => $this->DosenModel->get_request_ta($id_dosen),
+            'userInfo' => $userInfo
 
-            ];
+        ];
+        if ($userInfo['role_id'] == 2) {
+
             echo view('layout/template_dosen', $data);
+        } elseif ($userInfo['role_id'] == 1) {
+
+            echo view('layout/template_admin', $data);
         } else {
             echo view('errors/html/error_404');
         }
@@ -81,16 +85,20 @@ class Dosen extends BaseController
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $id_dosen = $userInfo['id'];
-        if ($userInfo['role_id'] == 2 || 1) {
-            $data = [
-                'title' => 'Home',
-                'isi' => 'dosen/isi_request',
-                'judul' => 'Request Mahasiswa',
-                'request' => $this->DosenModel->get_isi_request($id_request),
-                'userInfo' => $userInfo
+        $data = [
+            'title' => 'Home',
+            'isi' => 'dosen/isi_request',
+            'judul' => 'Request Mahasiswa',
+            'request' => $this->DosenModel->get_isi_request($id_request),
+            'userInfo' => $userInfo
 
-            ];
+        ];
+        if ($userInfo['role_id'] == 2) {
+
             echo view('layout/template_dosen', $data);
+        } elseif ($userInfo['role_id'] ==  1) {
+
+            echo view('layout/template_admin', $data);
         } else {
             echo view('errors/html/error_404');
         }
@@ -180,17 +188,20 @@ class Dosen extends BaseController
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $id_dosen = $userInfo['id'];
-        if ($userInfo['role_id'] == 2 || 1) {
-            $data = [
-                'title' => 'Home',
-                'isi' => 'dosen/bimbingan_mhs',
-                'bimbingan' => $this->DosenModel->bimbingan_mhs($id_dosen, $id_mahasiswa),
-                'bimbingan_skripsi' => $this->DosenModel->bimbingan_mhs_skripsi($id_dosen, $id_mahasiswa),
-                'judul' => 'bimbingan',
-                'userInfo' => $userInfo
+        $data = [
+            'title' => 'Home',
+            'isi' => 'dosen/bimbingan_mhs',
+            'bimbingan' => $this->DosenModel->bimbingan_mhs($id_dosen, $id_mahasiswa),
+            'bimbingan_skripsi' => $this->DosenModel->bimbingan_mhs_skripsi($id_dosen, $id_mahasiswa),
+            'judul' => 'bimbingan',
+            'userInfo' => $userInfo
+        ];
+        if ($userInfo['role_id'] == 2) {
 
-            ];
             echo view('layout/template_dosen', $data);
+        } elseif ($userInfo['role_id'] == 1) {
+
+            echo view('layout/template_admin', $data);
         } else {
             echo view('errors/html/error_404');
         }
@@ -221,36 +232,40 @@ class Dosen extends BaseController
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
         $id_dosen = $userInfo['id'];
-        if ($userInfo['role_id'] == 2 || 1) {
-            $cekfile = $this->DosenModel->cek_file($id_bimbingan);
-            if ($cekfile['file_revisi'] == '') {
-                $data = [
-                    'title' => 'Home',
-                    'isi' => 'dosen/isi_bimbingan',
-                    'bimbingan' => $this->DosenModel->get_isi_bimbingan($id_bimbingan),
-                    'datarow' =>   $this->DosenModel->get_detail($id_bimbingan),
-                    'judul' => 'bimbingan',
-                    'iframeo' => '<!--',
-                    'iframec' => '-->',
-                    'message' => 'File Mahasiswa kosong',
-                    'userInfo' => $userInfo
+        $cekfile = $this->DosenModel->cek_file($id_bimbingan);
+        if ($cekfile['file'] == '') {
+            $data = [
+                'title' => 'Home',
+                'isi' => 'dosen/isi_bimbingan',
+                'bimbingan' => $this->DosenModel->get_isi_bimbingan($id_bimbingan),
+                'datarow' =>   $this->DosenModel->get_detail($id_bimbingan),
+                'judul' => 'bimbingan',
+                'iframeo' => '<!--',
+                'iframec' => '-->',
+                'message' => 'File Mahasiswa kosong',
+                'userInfo' => $userInfo
 
-                ];
-            } else {
-                $data = [
-                    'title' => 'Home',
-                    'isi' => 'dosen/isi_bimbingan',
-                    'bimbingan' => $this->DosenModel->get_isi_bimbingan($id_bimbingan),
-                    'datarow' =>   $this->DosenModel->get_detail($id_bimbingan),
-                    'judul' => 'bimbingan',
-                    'iframeo' => '',
-                    'iframec' => '',
-                    'message' => '',
-                    'userInfo' => $userInfo
+            ];
+        } else {
+            $data = [
+                'title' => 'Home',
+                'isi' => 'dosen/isi_bimbingan',
+                'bimbingan' => $this->DosenModel->get_isi_bimbingan($id_bimbingan),
+                'datarow' =>   $this->DosenModel->get_detail($id_bimbingan),
+                'judul' => 'bimbingan',
+                'iframeo' => '',
+                'iframec' => '',
+                'message' => '',
+                'userInfo' => $userInfo
 
-                ];
-            }
+            ];
+        }
+        if ($userInfo['role_id'] == 2) {
+
             echo view('layout/template_dosen', $data);
+        } elseif ($userInfo['role_id'] == 1) {
+
+            echo view('layout/template_admin', $data);
         } else {
             echo view('errors/html/error_404');
         }

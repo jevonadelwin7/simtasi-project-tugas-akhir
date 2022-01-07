@@ -23,7 +23,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title"></h3>
+                <h3 class="card-title">Jadwal Seminar</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -45,7 +45,10 @@
                                 Nama Mahasiswa
                             </th>
                             <th class="bg-secondary text-center">
-                                Jenis
+                                Judul
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Penguji
                             </th>
                             <th class="bg-secondary text-center">
                                 Hari
@@ -67,7 +70,7 @@
                     <tbody>
                         <?php
                         $i = 1;
-                        foreach ($jadwal as $key => $value) { ?>
+                        foreach ($jadwal_seminar as $key => $value) { ?>
                             <tr>
                                 <td class="text-center">
                                     <?= $i++; ?>.
@@ -76,7 +79,10 @@
                                     <?= $value['mahasiswa']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['jenis']; ?>
+                                    <?= $value['judul']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['penguji']; ?>
                                 </td>
                                 <td class="text-center">
                                     <?= $value['hari']; ?>
@@ -96,7 +102,103 @@
                                         </i>
                                         Edit
                                     </a>
-                                    <a class="btn btn-danger btn-sm " href="#" data-toggle="modal" data-target="#edit<?= $value['id_jadwal'] ?>">
+                                    <a class="btn btn-danger btn-sm " href="<?= base_url('admin/delete_jadwal/' . $value['id_jadwal']) ?>">
+                                        <i class="far fa-trash-alt">
+                                        </i>
+                                        Hapus
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php  } ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Jadwal Skripsi</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="bg-secondary text-center">
+                                No
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Nama Mahasiswa
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Judul
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Penguji
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Hari
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Bulan
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Tahun
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Jam
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 1;
+                        foreach ($jadwal_sidang as $key => $value) { ?>
+                            <tr>
+                                <td class="text-center">
+                                    <?= $i++; ?>.
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['mahasiswa']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['judul']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['penguji']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['hari']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['bulan']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['tahun']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['jam']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-warning btn-sm " href="#" data-toggle="modal" data-target="#edit<?= $value['id_jadwal'] ?>">
+                                        <i class="far fa-edit">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm " href="<?= base_url('admin/delete_jadwal/' . $value['id_jadwal']) ?>">
                                         <i class="far fa-trash-alt">
                                         </i>
                                         Hapus
@@ -120,7 +222,7 @@ foreach ($jadwal as $key => $value) { ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal <?= $value['mahasiswa']; ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -129,9 +231,22 @@ foreach ($jadwal as $key => $value) { ?>
                 <form action="<?= base_url('admin/update_jadwal/    ' . $value['id_jadwal']); ?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
+                            <div class="form-group">
+                                <label for="inputName">Judul</label>
+                                <input type="text" name="judul" class="form-control text-center" value="<?= $value['judul']; ?>">
+                            </div>
+                            <label>Penguji</label>
+                            <select class="form-control" name="penguji">
+                                <option class="text-center"><?= $value['penguji']; ?></option>
+                                <?php foreach ($dosen as $c) : ?>
+                                    <option class="text-center" value="<?= $c['nama_dosen'] ?>"><?= $c['nama_dosen'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Hari</label>
                             <select class="form-control" name="hari">
-                                <option><?= $value['hari']; ?></option>
+                                <option class="text-center"><?= $value['hari']; ?></option>
                                 <option class="text-center" value="Senin">Senin</option>
                                 <option class="text-center" value="Selasa">Selasa</option>
                                 <option class="text-center" value="Rabu">Rabu</option>
@@ -144,7 +259,7 @@ foreach ($jadwal as $key => $value) { ?>
                         <div class="form-group">
                             <label>Bulan</label>
                             <select class="form-control" name="bulan">
-                                <option><?= $value['bulan']; ?></option>
+                                <option class="text-center"><?= $value['bulan']; ?></option>
                                 <option class="text-center" value="Januari">Januari</option>
                                 <option class="text-center" value="Februari">Februari</option>
                                 <option class="text-center" value="Maret">Maret</option>
@@ -165,7 +280,7 @@ foreach ($jadwal as $key => $value) { ?>
                         </div>
                         <div class="form-group ">
                             <label for="inputName">Jam</label>
-                            <input type="time" name="jam" class="form-control text-center mx-auto" value="<?= $value['jam']; ?>">
+                            <input type="time" name="jam" class="form-control text-center" value="<?= $value['jam']; ?>">
                         </div>
                     </div>
                     <div class="modal-footer">

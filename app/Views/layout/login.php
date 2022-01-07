@@ -29,8 +29,13 @@
 
                 <form action="<?= base_url('auth/check') ?>" method="post">
                     <?= csrf_field(); ?>
+
                     <?php if (!empty(session()->getFlashdata('fail'))) : ?>
                         <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
+                    <?php endif ?>
+
+                    <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
                     <?php endif ?>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email" name="email" value="<?= set_value('email') ?>">

@@ -118,4 +118,13 @@ class UsersModel extends Model
     {
         return $this->db->table('tb_pendaftaran')->where('id_pendaftaran', $id_pendaftaran)->get()->getRowArray();
     }
+    // Jadwal Seminar & Sidang
+    public function get_jadwal()
+    {
+        return $this->db->table('tb_jadwal')->where('jenis', 'proposal')->get()->getresultArray();
+    }
+    public function get_jadwal_sidang()
+    {
+        return $this->db->table('tb_jadwal')->where('jenis', 'skripsi')->get()->getresultArray();
+    }
 }

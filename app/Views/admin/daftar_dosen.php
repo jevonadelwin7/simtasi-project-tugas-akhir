@@ -54,7 +54,7 @@
                                             <a href="<?= base_url('mahasiswa/request_bimbingan_proposal/' . $value['id']) ?>" class="btn btn-sm bg-warning">
                                                 Edit
                                             </a>
-                                            <a href="<?= base_url('mahasiswa/request_bimbingan_proposal/' . $value['id']) ?>" class="btn btn-sm bg-danger">
+                                            <a href="<?= base_url('admin/delete_dosen/' . $value['id']) ?>" class="btn btn-sm bg-danger">
                                                 Hapus
                                             </a>
                                         </div>

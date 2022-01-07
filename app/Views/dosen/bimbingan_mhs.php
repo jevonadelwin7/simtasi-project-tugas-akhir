@@ -7,8 +7,10 @@
                 <div class="col-sm-6">
                     <h1>BIMBINGAN </h1>
                     <div class="kembali mt-4">
-
-                        <a href="<?= base_url('dosen/bimbingan') ?>" class="btn btn-success"><i class="fas fa-arrow-left">
+                        <?php
+                        $url = isset($_SERVER['HTTP_REFERER']) ? htmlspecialchars($_SERVER['HTTP_REFERER']) : '';
+                        ?>
+                        <a href="<?= $url ?>" class="btn btn-success"><i class="fas fa-arrow-left">
                             </i> Kembali</a>
                     </div>
                 </div>

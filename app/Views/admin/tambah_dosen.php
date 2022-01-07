@@ -37,8 +37,11 @@
                                 <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
                             <?php endif ?>
 
-                            <?php if (!empty(session()->getFlashdata('fail'))) : ?>
-                                <div class="alert alert-danger"><?= session()->getFlashdata('success'); ?></div>
+                            <?php if (!empty(session()->getFlashdata('error'))) : ?>
+                                <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+                            <?php endif ?>
+                            <?php if (!empty(session()->getFlashdata('success'))) : ?>
+                                <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
                             <?php endif ?>
                             <div class="input-group mb-3">
                                 <input type="number" name="no" class="form-control" placeholder="NOD" value="<?= set_value('no') ?>">

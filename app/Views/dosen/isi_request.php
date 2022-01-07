@@ -35,7 +35,7 @@
                         <!-- form start -->
                         <?php
                         foreach ($request as $key => $value) { ?>
-                            <form action="<?= base_url('dosen/pilihan_request'); ?>" method="post">
+                            <form action="<?= base_url('admin/pilihan_request'); ?>" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="inputName">Nama Mahasiswa</label>
@@ -73,8 +73,10 @@
                                         <label for="inputDescription">Komentar</label>
                                         <textarea name="komentar" class="form-control" placeholder="Harap isi pesan kepada Calon Dosen Pembimbing." rows="4" <?= $value['disabled']; ?>> </textarea>
                                     </div>
-                                    <label for="inputDescription">jenis</label>
-                                    <textarea name="jenis" class="form-control" value="proposal" rows="4">proposal</textarea>
+                                    <div class="form-group" hidden>
+                                        <label for="inputDescription">jenis</label>
+                                        <textarea name="jenis" class="form-control" value="proposal" rows="4">proposal</textarea>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer text-center">

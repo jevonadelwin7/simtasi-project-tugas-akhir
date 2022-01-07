@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DosenModel;
+use App\Libraries\Hash;
 
 class Admin extends BaseController
 {
@@ -143,7 +144,10 @@ class Admin extends BaseController
                 'title' => 'Home',
                 'isi' => 'admin/jadwal_sidang_seminar',
                 'judul' => 'Dashboard',
+                'dosen' => $this->DosenModel->daftar_dosen(),
                 'jadwal' => $this->DosenModel->get_jadwal(),
+                'jadwal_seminar' => $this->DosenModel->get_jadwal_seminar(),
+                'jadwal_sidang' => $this->DosenModel->get_jadwal_sidang(),
                 'userInfo' => $userInfo
 
             ];
@@ -155,6 +159,8 @@ class Admin extends BaseController
     public function update_jadwal($id_jadwal)
     {
         $data = [
+            'judul' => $this->request->getPost('judul'),
+            'penguji' => $this->request->getPost('penguji'),
             'hari' => $this->request->getPost('hari'),
             'bulan' => $this->request->getPost('bulan'),
             'tahun' => $this->request->getPost('tahun'),
@@ -164,6 +170,18 @@ class Admin extends BaseController
         $this->DosenModel->update_jadwal($data, $id_jadwal);
         return redirect()->to(base_url('admin/jadwal'));
     }
+
+    public function delete_jadwal($id_jadwal)
+    {
+        $this->DosenModel->delete_jadwal($id_jadwal);
+        return redirect()->to(base_url('admin/jadwal'));
+    }
+    public function delete_dosen($id)
+    {
+        $this->DosenModel->delete_dosen($id);
+        return redirect()->to(base_url('admin/daftar_dosen'));
+    }
+
 
     //------------------Menu Dosen--------------------------------
     public function request_mhs()
@@ -248,7 +266,7 @@ class Admin extends BaseController
             ];
             $this->DosenModel->insert_bimbingan($data);
             $this->DosenModel->update_request($datax, $id_request);
-            return redirect()->to(base_url('dosen/request_mhs'));
+            return redirect()->to(base_url('admin/request_mhs'));
         } else {
             $id_request = $this->request->getPost('id_request');
             $data = [
@@ -262,7 +280,7 @@ class Admin extends BaseController
                 'disabled' => ''
             ];
             $this->DosenModel->update_request($data, $id_request);
-            return redirect()->to(base_url('dosen'));
+            return redirect()->to(base_url('admin/request_mhs'));
         }
     }
     public function bimbingan()

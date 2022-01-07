@@ -32,6 +32,14 @@ class DosenModel extends Model
     {
         return $this->db->table('tb_jadwal')->insert($data);
     }
+    public function get_jadwal_seminar()
+    {
+        return $this->db->table('tb_jadwal')->where('jenis', 'proposal')->get()->getresultArray();
+    }
+    public function get_jadwal_sidang()
+    {
+        return $this->db->table('tb_jadwal')->where('jenis', 'skripsi')->get()->getresultArray();
+    }
     public function get_jadwal()
     {
         return $this->db->table('tb_jadwal')->get()->getresultArray();
@@ -40,6 +48,15 @@ class DosenModel extends Model
     {
         return $this->db->table('tb_jadwal')->update($data, array('id_jadwal' => $id_jadwal));
     }
+    public function delete_jadwal($id_jadwal)
+    {
+        return $this->db->table('tb_jadwal')->where('id_jadwal', $id_jadwal)->delete();
+    }
+    public function delete_dosen($id)
+    {
+        return $this->db->table('tb_dosen')->where('id', $id)->delete();
+    }
+
 
     public function get_request($id_dosen)
     {
