@@ -113,13 +113,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('pertandingan/index') ?>" class="nav-link">
+                <a href="<?= base_url('mahasiswa/hasil_seminar') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Seminar Proposal</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
+                <a href="<?= base_url('mahasiswa/hasil_sidang') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sidang Skripsi</p>
                 </a>

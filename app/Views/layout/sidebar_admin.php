@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('admin/request_mhs') ?>" class="nav-link">
+                    <a href="<?= base_url('admin/nilai_mahasiswa') ?>" class="nav-link">
                         <i class="nav-icon fas fa-user-plus"></i>
                         <p>
                             Nilai Mahasiswa

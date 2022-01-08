@@ -56,6 +56,31 @@ class DosenModel extends Model
     {
         return $this->db->table('tb_dosen')->where('id', $id)->delete();
     }
+    //--------------------Nilai Mahasiswa--------------------------------------------------------------
+    public function get_nilai_seminar()
+    {
+        return $this->db->table('tb_nilai')->where('jenis', 'proposal')->get()->getresultArray();
+    }
+    public function get_nilai_sidang()
+    {
+        return $this->db->table('tb_nilai')->where('jenis', 'skripsi')->get()->getresultArray();
+    }
+    public function get_nilai()
+    {
+        return $this->db->table('tb_nilai')->get()->getresultArray();
+    }
+    public function delete_nilai($id_nilai)
+    {
+        return $this->db->table('tb_nilai')->where('id_nilai', $id_nilai)->delete();
+    }
+    public function insert_nilai($data)
+    {
+        return $this->db->table('tb_nilai')->insert($data);
+    }
+    public function update_nilai($data, $id_nilai)
+    {
+        return $this->db->table('tb_nilai')->update($data, array('id_nilai' => $id_nilai));
+    }
 
 
     public function get_request($id_dosen)

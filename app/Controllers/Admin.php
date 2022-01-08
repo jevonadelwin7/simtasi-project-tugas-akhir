@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\DosenModel;
-use App\Libraries\Hash;
+use App\Models\NilaiModel;
 
 class Admin extends BaseController
 {
@@ -73,9 +73,9 @@ class Admin extends BaseController
         $userInfo = $userModel->find($loggedUserID);
         if ($userInfo['role_id'] == 1) {
             $data = [
-                'title' => 'Home',
+                'title' => 'Pendaftaran',
                 'isi' => 'admin/pendaftaran',
-                'judul' => 'Dashboard',
+                'judul' => 'Pendaftaran',
                 'daftar' => $this->DosenModel->get_pendaftaran(),
                 'userInfo' => $userInfo
 
@@ -92,9 +92,9 @@ class Admin extends BaseController
         $userInfo = $userModel->find($loggedUserID);
         if ($userInfo['role_id'] == 1) {
             $data = [
-                'title' => 'Home',
+                'title' => 'isi Pendaftaran',
                 'isi' => 'admin/isi_pendaftaran',
-                'judul' => 'Dashboard',
+                'judul' => 'isi Pendaftaran',
                 'pendaftaran' => $this->DosenModel->get_isi_pendaftaran($id_pendaftaran),
                 'userInfo' => $userInfo
 
@@ -120,6 +120,7 @@ class Admin extends BaseController
 
             ];
             $this->DosenModel->insert_jadwal($data);
+            $this->DosenModel->insert_nilai($data);
             $this->DosenModel->update_pendaftaran($datax, $id_pendaftaran);
             return redirect()->to(base_url('admin/pendaftaran'));
         } else {
@@ -141,9 +142,9 @@ class Admin extends BaseController
         $userInfo = $userModel->find($loggedUserID);
         if ($userInfo['role_id'] == 1) {
             $data = [
-                'title' => 'Home',
+                'title' => 'Jadwal Seminar & Sidang',
                 'isi' => 'admin/jadwal_sidang_seminar',
-                'judul' => 'Dashboard',
+                'judul' => 'Jadwal Seminar & Sidang',
                 'dosen' => $this->DosenModel->daftar_dosen(),
                 'jadwal' => $this->DosenModel->get_jadwal(),
                 'jadwal_seminar' => $this->DosenModel->get_jadwal_seminar(),
@@ -180,6 +181,46 @@ class Admin extends BaseController
     {
         $this->DosenModel->delete_dosen($id);
         return redirect()->to(base_url('admin/daftar_dosen'));
+    }
+
+
+    public function nilai_mahasiswa()
+    {
+        $page = \Config\Services::pager();
+        $nilai = new NilaiModel();
+        $userModel = new \App\Models\DosenModel();
+        $loggedUserID = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedUserID);
+        if ($userInfo['role_id'] == 1) {
+            $data = [
+                'title' => 'Nilai Mahasiswa',
+                'isi' => 'admin/nilai_mhs',
+                'judul' => 'Nilai Mahasiswa',
+                'nilai' => $this->DosenModel->get_nilai(),
+                'nilai_seminar' => $nilai->where('jenis', 'proposal')->paginate(5),
+                'nilai_sidang' => $nilai->where('jenis', 'skripsi')->paginate(5),
+                'halaman' => $nilai->pager,
+                'userInfo' => $userInfo
+
+            ];
+            echo view('layout/template_admin', $data);
+        } else {
+            echo view('errors/html/error_404');
+        }
+    }
+    public function update_nilai($id_nilai)
+    {
+        $data = [
+            'judul' => $this->request->getPost('judul'),
+            'nilai' => $this->request->getPost('nilai'),
+        ];
+        $this->DosenModel->update_nilai($data, $id_nilai);
+        return redirect()->to(base_url('admin/nilai_mahasiswa'));
+    }
+    public function delete_niali($id_nilai)
+    {
+        $this->DosenModel->delete_niali($id_nilai);
+        return redirect()->to(base_url('admin/nilai_mahasiswa'));
     }
 
 
@@ -291,11 +332,11 @@ class Admin extends BaseController
         $id_dosen = $userInfo['id'];
         if ($userInfo['role_id'] == 2 || 1) {
             $data = [
-                'title' => 'Home',
+                'title' => 'Bimbingan',
                 'isi' => 'dosen/bimbingan',
                 'bimbingan' => $this->DosenModel->get_bimbingan($id_dosen),
                 'bimbingan_skripsi' => $this->DosenModel->get_bimbingan_skripsi($id_dosen),
-                'judul' => 'bimbingan',
+                'judul' => 'Bimbingan',
                 'userInfo' => $userInfo
 
             ];

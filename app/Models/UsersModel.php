@@ -127,4 +127,20 @@ class UsersModel extends Model
     {
         return $this->db->table('tb_jadwal')->where('jenis', 'skripsi')->get()->getresultArray();
     }
+    public function cek_nilai_seminar($idmhs)
+    {
+        return $this->db->table('tb_nilai')->where('id_mahasiswa', $idmhs)->where('jenis', 'proposal')->countAllResults();
+    }
+    public function cek_nilai_sidang($idmhs)
+    {
+        return $this->db->table('tb_nilai')->where('id_mahasiswa', $idmhs)->where('jenis', 'skripsi')->countAllResults();
+    }
+    public function get_nilai_seminar($idmhs)
+    {
+        return $this->db->table('tb_nilai')->where('id_mahasiswa', $idmhs)->where('jenis', 'proposal')->get()->getresultArray();
+    }
+    public function get_nilai_sidang($idmhs)
+    {
+        return $this->db->table('tb_nilai')->where('id_mahasiswa', $idmhs)->where('jenis', 'skripsi')->get()->getresultArray();
+    }
 }

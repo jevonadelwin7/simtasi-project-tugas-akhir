@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><?= $judul  ?></h1>
+                    <h1> Pendaftaran Seminar</h1>
                     <div class="kembali mt-4">
 
                         <a href="<?= base_url('mahasiswa/bimbingan') ?>" class="btn btn-success"><i class="fas fa-arrow-left">
@@ -27,18 +27,11 @@
                 <div class="col-md-10 mx-auto">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Lengkapi berkas dan kumpulkan</h3>
+                            <h3 class="card-title"></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
-                            <?php if (!empty(session()->getFlashdata('error'))) : ?>
-                                <div class="alert alert-danger" role="alert">
-                                    <h4>Periksa Entrian Form</h4>
-                                    </hr />
-                                    <?php echo session()->getFlashdata('error'); ?>
-                                </div>
-                            <?php endif; ?>
 
 
                             <form action="<?= base_url('mahasiswa/daftar'); ?>" method="post" enctype="multipart/form-data">
@@ -53,27 +46,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName">Status</label>
-                                        <input type="text" name="status" class="form-control bg-secondary text-center" value="Anda belum mengumpulkan berkas.">
+                                        <input type="text" name="status" class="form-control bg-<?= $color; ?> text-center" value="<?= $pesan; ?>" readonly>
                                     </div>
-                                    <div class="form-group" hidden>
-                                        <label for="inputName">jenis</label>
-                                        <input type="text" name="jenis" class="form-control bg-secondary text-center" value="skripsi">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="berkas" class="form-label">Berkas</label>
-                                        <input type="file" class="form-control" id="berkas" name="berkas">
-                                        <label for="filesats" class="form-label"></label>
-                                    </div>
-                                    <div class=" form-group">
-                                        <label for="inputDescription">Pesan Mahasiswa</label>
-                                        <textarea name="komentar" class="form-control" placeholder="Harap isi pesan kepada Dosen." rows="4"></textarea>
-                                    </div>
+                                </div>
+                            </form>
 
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer text-center">
-                                    <button type="submit" name="submit" value="insertt" class="btn btn-block btn-success">Kumpulkan</button>
-                                </div>
 
                         </div>
                         <!-- /.card -->

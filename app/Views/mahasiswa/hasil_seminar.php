@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> Pendaftaran Sidang</h1>
+                    <h1> Nilai Seminar Proposal</h1>
                     <div class="kembali mt-4">
 
                         <a href="<?= base_url('mahasiswa/bimbingan') ?>" class="btn btn-success"><i class="fas fa-arrow-left">
@@ -32,16 +32,9 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
-                            <?php if (!empty(session()->getFlashdata('error'))) : ?>
-                                <div class="alert alert-danger" role="alert">
-                                    <h4>Periksa Entrian Form</h4>
-                                    </hr />
-                                    <?php echo session()->getFlashdata('error'); ?>
-                                </div>
-                            <?php endif; ?>
 
                             <?php
-                            foreach ($pendaftaran as $key => $value) { ?>
+                            foreach ($nilai as $key => $value) { ?>
                                 <form action="<?= base_url('mahasiswa/daftar'); ?>" method="post" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="form-group">
@@ -52,34 +45,25 @@
                                             <label for="inputName">ID Mahasiswa</label>
                                             <input type="text" name="id_mahasiswa" class="form-control" value="<?= $userInfo['id']; ?>" readonly>
                                         </div>
-                                        <div class="form-group" hidden>
-                                            <label for="inputName">Nama Mahasiswa</label>
-                                            <input type="text" name="nama_mhs" class="form-control" value="" readonly>
-                                        </div>
-                                        <div class="form-group" hidden>
-                                            <label for="inputName">Nama Mahasiswa</label>
-                                            <input type="text" name="id_pendaftaran" class="form-control" value="<?= $value['id_pendaftaran']; ?>" readonly>
-                                        </div>
                                         <div class="form-group">
+                                            <label for="inputName">Judul</label>
+                                            <input type="text" name="id_mahasiswa" class="form-control" value="<?= $value['judul']; ?>" readonly>
+                                        </div>
+                                        <div class="form-group text-center" hidden>
                                             <label for="inputName">Status</label>
-                                            <input type="text" name="status" class="form-control bg-<?= $value['status_bg'] ?> text-center" value="<?= $value['status'] ?>" readonly>
+                                            <input type="text" name="status" class="form-control bg-<?= $color; ?> text-center" value="<?= $pesan; ?>" readonly>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="berkas" class="form-label">Berkas</label>
-                                            <input type="file" class="form-control" id="berkas" name="berkas">
-                                            <label for="filesats" class="form-label"><?= $value['file']; ?></label>
+                                        <div class=" form-group text-center">
+                                            <label for="inputDescription" class="text-center mx-auto">Selamat Nilai anda adalah </label>
+                                            <br>
+                                            <label for="inputDescription" class="display-3">
+                                                <?= $value['nilai']; ?>
+                                            </label>
                                         </div>
-                                        <div class=" form-group">
-                                            <label for="inputDescription">Pesan Mahasiswa</label>
-                                            <textarea name="komentar" class="form-control" placeholder="Harap isi pesan kepada Calon Dosen Pembimbing." rows="4"><?= $value['pesan_mahasiswa']; ?></textarea>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-center">
-                                        <button type="submit" name="submit" value="kirim" class="btn btn-block btn-success">Kirim Kembali</button>
                                     </div>
                                 </form>
                             <?php  } ?>
+
                         </div>
                         <!-- /.card -->
                         <!-- general form elements -->

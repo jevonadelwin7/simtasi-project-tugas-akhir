@@ -32,7 +32,7 @@ class Mahasiswa extends BaseController
             $data = [
                 'title' => 'Home',
                 'isi' => 'mahasiswa/dash',
-                'judul' => 'Dashboard',
+                'judul' => 'Dashboard Mahasiswa',
                 'bimbingan' => $this->UsersModel->get_bimbingan_status($idmhs),
                 'req_status' => $this->UsersModel->cek_request_status($idmhs),
                 'pesan' => $pesan,
@@ -252,10 +252,10 @@ class Mahasiswa extends BaseController
                 'jenis' => $this->request->getPost('jenis'),
                 'file' => $fileName,
                 'status_bg' => 'secondary',
-                'status' => 'menunggu'
+                'status' => 'menunggu pemeriksaan kelengkapan berkas'
             ];
             $this->UsersModel->insert_daftar_seminar($data);
-            return redirect()->to(base_url('mahasiswa/pendaftaran_seminar'));
+            return redirect()->back();
         }
     }
 
@@ -599,6 +599,86 @@ class Mahasiswa extends BaseController
                 'userInfo' => $userInfo
             ];
             echo view('layout/template', $data);
+        } else {
+            echo view('errors/html/error_404');
+        }
+    }
+    public function hasil_seminar()
+    {
+
+        $userModel = new \App\Models\UsersModel();
+        $loggedUserID = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedUserID);
+        if ($userInfo['role_id'] == 3) {
+            $idmhs = $userInfo['id'];
+            $tot = $this->UsersModel->cek_nilai_seminar($idmhs);
+            if ($tot > 0) {
+                $pesan = 'Nilai anda telah keluar!';
+                $color = 'success';
+                $data = [
+                    'title' => 'Hasil Seminar',
+                    'isi' => 'mahasiswa/hasil_seminar',
+                    'judul' => 'Hasil Seminar',
+                    'nilai' => $this->UsersModel->get_nilai_seminar($idmhs),
+                    'pesan' => $pesan,
+                    'color' => $color,
+                    'userInfo' => $userInfo
+                ];
+                echo view('layout/template', $data);
+            } else {
+                $pesan = 'Nilai Anda Belum Ada';
+                $color = 'secondary';
+                $data = [
+                    'title' => 'Hasil Seminar',
+                    'isi' => 'mahasiswa/hasil',
+                    'judul' => 'Hasil seminar',
+                    'nilai' => $this->UsersModel->get_nilai_seminar($idmhs),
+                    'pesan' => $pesan,
+                    'color' => $color,
+                    'userInfo' => $userInfo
+                ];
+                echo view('layout/template', $data);
+            }
+        } else {
+            echo view('errors/html/error_404');
+        }
+    }
+    public function hasil_sidang()
+    {
+
+        $userModel = new \App\Models\UsersModel();
+        $loggedUserID = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedUserID);
+        if ($userInfo['role_id'] == 3) {
+            $idmhs = $userInfo['id'];
+            $tot = $this->UsersModel->cek_nilai_sidang($idmhs);
+            if ($tot > 0) {
+                $pesan = 'Nilai anda telah keluar!';
+                $color = 'success';
+                $data = [
+                    'title' => 'Hasil Seminar',
+                    'isi' => 'mahasiswa/hasil_sidang',
+                    'judul' => 'Hasil Seminar',
+                    'nilai' => $this->UsersModel->get_nilai_sidang($idmhs),
+                    'pesan' => $pesan,
+                    'color' => $color,
+                    'userInfo' => $userInfo
+                ];
+                echo view('layout/template', $data);
+            } else {
+                $pesan = 'Nilai Anda Belum Ada';
+                $color = 'secondary';
+                $data = [
+                    'title' => 'Hasil Seminar',
+                    'isi' => 'mahasiswa/hasil',
+                    'judul' => 'Hasil seminar',
+                    'nilai' => $this->UsersModel->get_nilai_sidang($idmhs),
+                    'pesan' => $pesan,
+                    'color' => $color,
+                    'userInfo' => $userInfo
+                ];
+                echo view('layout/template', $data);
+            }
         } else {
             echo view('errors/html/error_404');
         }
