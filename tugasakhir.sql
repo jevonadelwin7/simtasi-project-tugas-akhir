@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2022 at 03:20 AM
+-- Generation Time: Jan 08, 2022 at 04:39 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -46,11 +46,7 @@ CREATE TABLE `bimbingan` (
 --
 
 INSERT INTO `bimbingan` (`id_bimbingan`, `mahasiswa`, `dosen`, `judul`, `file`, `file_revisi`, `komentar`, `komentar_mhs`, `jenis`, `id_mahasiswa`, `id_dosen`) VALUES
-(28, 'Billy Timporok', 'Ferdian Aditya', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', '1639202515_e0bae9a7a49600862f58.pdf', '1639197649_98b39cf7873fdc245f04.pdf', '   oke billl, diterima', '  berikut lampiran BAB 1 saya kak', 'proposal', '201804560012', '543212345'),
-(29, 'Billy Timporok', 'Ferdian Aditya', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', '', '', '', ' Selamat pagi kak ini file saya', 'proposal', '201804560012', '543212345'),
-(36, 'Billy Timporok', 'Ferdian Aditya', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', '', '', ' baik billy', '', 'proposal', '201804560012', '543212345'),
-(42, 'Billy Timporok', 'Ferdian Aditya', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', '', '', '', '', 'skripsi', '201804560012', '543212345'),
-(43, 'Jevon Adelwin Hura', 'Ferdian Aditya', 'Sistem Informasi Manajemen Tugas Akhir', '', '', '', '', 'proposal', '201804560013', '543212345');
+(47, 'Andre Cahyadi', 'Denny', 'Perancangan & penerapan sistem e-voting di Unika Atma Jaya', '', '', '', '', 'proposal', '201804560017', '201842321312');
 
 -- --------------------------------------------------------
 
@@ -73,9 +69,9 @@ CREATE TABLE `tb_dosen` (
 --
 
 INSERT INTO `tb_dosen` (`id`, `nama_dosen`, `email`, `no_hp`, `info`, `password`, `role_id`) VALUES
-('1234567891', 'Koordinator TA', 'koordinator@gmail.com', '085213214322', '', '$2y$10$2PzN9fMi6g/v5L9AfShLvONtq6mQsJAgGQjXgk2UOgelxt1ARjh2i', 1),
-('201842321312', 'Denny', 'denny@gmail.com', '084231231231', '', '$2y$10$hqVhvc2vY0Ufw8SiWNi4xuAjBSwH9XTQ0EmubrThY1kqw/6FZQ3oO', 2),
-('543212345', 'Ferdian Aditya', 'ferdian@gmail.com', '085212321123', '', '$2y$10$ZV.5Amk0VgqIgaKzLnYWAO6LfUqbs57BelT7NU5F9zMOJ5W.Ncn36', 2),
+('1234567891', 'Koordinator TA', 'koordinator@gmail.com', '085213214322', '', '$2y$10$2PzN9fMi6g/v5L9AfShLvONtq6mQsJAgGQjXgk2UOgelxt1ARjh2i', 2),
+('201842321312', 'Denny', 'denny@gmail.com', '084231231231', '', '$2y$10$hqVhvc2vY0Ufw8SiWNi4xuAjBSwH9XTQ0EmubrThY1kqw/6FZQ3oO', 1),
+('31231232131', 'Julius Bata', 'bata@mail.com', '08424212312', '', '$2y$10$GAT627QXCh3FEFjYFrCf/.w25jIV2Vl.6pQHfpu44rTdzVX3bprAm', 2),
 ('789010123', 'Sri Mulyanti', 'sri@gmail.com', '085232324212', '', '$2y$10$fofwvmM4yeHgcNNYGUEUH.S8giVEOHb05/j0BughO/9gDhTX2ufNe', 2);
 
 -- --------------------------------------------------------
@@ -88,20 +84,45 @@ CREATE TABLE `tb_jadwal` (
   `id_jadwal` int(11) NOT NULL,
   `id_mahasiswa` varchar(20) NOT NULL,
   `mahasiswa` varchar(50) NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `penguji` varchar(50) NOT NULL,
   `jenis` varchar(10) NOT NULL,
   `hari` varchar(10) DEFAULT NULL,
   `bulan` varchar(10) DEFAULT NULL,
   `tahun` varchar(10) DEFAULT NULL,
-  `jam` varchar(10) DEFAULT NULL
+  `jam` varchar(10) DEFAULT NULL,
+  `ruang` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_jadwal`
 --
 
-INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mahasiswa`, `mahasiswa`, `jenis`, `hari`, `bulan`, `tahun`, `jam`) VALUES
-(3, '201804560012', 'Billy Timporok', 'proposal', 'Jumat', 'Februari', '2022', '13:56'),
-(4, '201804560012', 'Billy Timporok', 'skripsi', 'Senin', 'Juni', '2021', '14:35');
+INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mahasiswa`, `mahasiswa`, `judul`, `penguji`, `jenis`, `hari`, `bulan`, `tahun`, `jam`, `ruang`) VALUES
+(7, '201804560012', 'Billy Timporok', 'Sistem Informasi Manajemen Tugas Akhir', 'Julius Bata', 'proposal', 'Rabu', 'Maret', '2022', '10:15', ''),
+(8, '201804560012', 'Billy Timporok', '', '', 'skripsi', NULL, NULL, NULL, NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai`
+--
+
+CREATE TABLE `tb_nilai` (
+  `id_nilai` int(11) NOT NULL,
+  `id_mahasiswa` varchar(20) NOT NULL,
+  `mahasiswa` varchar(20) NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `nilai` varchar(5) NOT NULL,
+  `jenis` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_nilai`
+--
+
+INSERT INTO `tb_nilai` (`id_nilai`, `id_mahasiswa`, `mahasiswa`, `judul`, `nilai`, `jenis`) VALUES
+(1, '201804560012', 'Billy Timporok', 'Sistem Informasi Manajemen Tugas Akhir', '90', 'proposal');
 
 -- --------------------------------------------------------
 
@@ -127,8 +148,8 @@ CREATE TABLE `tb_pendaftaran` (
 --
 
 INSERT INTO `tb_pendaftaran` (`id_pendaftaran`, `id_dosen`, `id_mahasiswa`, `mahasiswa`, `file`, `jenis`, `status`, `status_bg`, `pesan_dosen`, `pesan_mahasiswa`) VALUES
-(11, '543212345', '201804560012', 'Billy Timporok', '1640263082_fd63159f73d20824d4e0.rar', 'proposal', 'Berkas lengkap dan sudah diterima.', 'success', 'maaf, belum lengkap', 'dasdadadsdad'),
-(13, '543212345', '201804560012', 'Billy Timporok', '1640263149_64c18b920021701c5f22.rar', 'skripsi', 'Berkas lengkap dan sudah diterima.', 'success', 'sudah lengkap.', 'asddasasd');
+(16, '543212345', '201804560012', 'Billy Timporok', '1641636548_6392a016bf906487b082.pdf', 'proposal', 'menunggu', 'secondary', NULL, 'dasasddas'),
+(17, '543212345', '201804560012', 'Billy Timporok', '1641636599_56e0833b3bf0ad47dba8.pdf', 'skripsi', 'menunggu', 'secondary', NULL, 'sdasdasdads');
 
 -- --------------------------------------------------------
 
@@ -156,9 +177,7 @@ CREATE TABLE `tb_request_mhs` (
 --
 
 INSERT INTO `tb_request_mhs` (`id_request`, `mahasiswa`, `judul`, `tentang_judul`, `pesan`, `pesan_dosen`, `jenis`, `status`, `status_class`, `disabled`, `id_dosen`, `id_mahasiswa`) VALUES
-(12, 'Billy Timporok', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit accusantium quia fuga voluptates adipisci id suscipit corrupti dolorum velit voluptate aliquid quae dolores veniam animi, repudiandae architecto laudantium consequatur ipsa.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit accusantium quia fuga voluptates adipisci id suscipit corrupti dolorum velit voluptate aliquid quae dolores veniam animi, repudiandae architecto laudantium consequatur ipsa.', '', 'proposal', 'diterima', 'success', 'disabled', '543212345', '201804560012'),
-(24, 'Billy Timporok', 'Analisis Perancangan UI & UX pada Aplikasi XYZ', 'Analisis Perancangan UI & UX pada Aplikasi XYZAnalisis Perancangan UI & UX pada Aplikasi XYZAnalisis Perancangan UI & UX pada Aplikasi XYZ', 'apakah bapak bersedia ?', ' baik, saya bersedia', 'skripsi', 'diterima', 'success', 'disabled', '543212345', '201804560012'),
-(25, 'Jevon Adelwin Hura', 'Sistem Informasi Manajemen Tugas Akhir', 'formasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhir', 'formasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhirformasi Manajemen Tugas Akhir', '', 'proposal', 'diterima', 'success', 'disabled', '543212345', '201804560013');
+(29, 'Andre Cahyadi', 'Perancangan & penerapan sistem e-voting di Unika Atma Jaya', 'Perancangan & penerapan sistem e-voting di Unika Atma JayaPerancangan & penerapan sistem e-voting di Unika Atma JayaPerancangan & penerapan sistem e-voting di Unika Atma JayaPerancangan & penerapan sistem e-voting di Unika Atma Jaya', 'Selamat pagi pak, apakah bapak bersedia menjadi dosen pembimbing saya?. Terimakasih pak ', '', 'proposal', 'diterima', 'success', 'disabled', '201842321312', '201804560017');
 
 -- --------------------------------------------------------
 
@@ -181,9 +200,15 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`id`, `nama_user`, `email`, `no_hp`, `password`, `role_id`) VALUES
 ('0979123122323', 'juangga rizki hura', 'anggas.201804560013@stude', '08312321323', '$2y$10$2VW0gP3Og7PD9nylMATIKOqb.KP3yySk93Y80dnrVQigsCPW3v1pW', 3),
+('2018023123', 'dasd dadas dasdsa', 'jefasd@mail.com', '0812313123', '$2y$10$nIpX9WkWqEsqOaA4Y/B86epaKNFqdOLdsWwie58/b0ZqiNOfklzlm', 3),
+('201804560004', 'kevin kurniawan', 'kevin@mail.com', '08525252252', '$2y$10$dn7xmMjsdc/N2S0Kh.lFwuW/vCyJsXtio8IvPkvGS0LvExDt02ZZi', 3),
 ('201804560012', 'Billy Timporok', 'billy@gmail.com', '085232414354', '$2y$10$t0.IV5r6u3YJN7pGQtqf5u1gnDZC9SwvW1v2q9CcyinC14siETQ9i', 3),
 ('201804560013', 'Jevon Adelwin Hura', 'jevon@gmail.com', '085218720488', '$2y$10$Im3CFS0uc2zb9i40aARnFeKk4BGxqx4o41MaXbU4Ylt4Bph0IWFHG', 3),
+('201804560017', 'Andre Cahyadi', 'andre@mail.com', '0812321242123', '$2y$10$WPKdfW6jeqMBox0gIn8.OueL6z7wP5uSOiy3nuEnfqyqlFBR4dfli', 3),
+('23122323213123', 'testeqqw', 'ashia@maildasda1.com', '08121223123122', '$2y$10$wJRP9mIF7dI/qBaFk8bSEeEfq.6mq2Fy2rI7zepLftc3cP1AtZ3qS', 3),
+('231231231', 'test', 'haha@mail.com', '930123133', '$2y$10$0F6DnhpirLXoRxa8gzXcM.c7T09F1KNImjXlUoFXfDzc9Avv1JgaG', 3),
 ('231231313', 'andre cahyadi', 'andre.201804560013@studen', '0842313123', '$2y$10$6SJhtTcML9CouFaU/Z8bY.aeArojMI3uZVqJv9toKBXBupoT.kV1S', 3),
+('31123231', 'testewqw', 'hsas@mail.com', '082123123', '$2y$10$h5o0ZAPIobd1FonHgdqque5rINEEED7q0XYdWmeGcY9Rk9BeJurUK', 3),
 ('312231312', 'kevin kurniawan', 'kevin.201804560013@studen', '08218012812', '$2y$10$4arhDEet19U2RGjzqRMZM.neiR/R.ldTXQBju1yBZtszDg0U4os16', 3);
 
 --
@@ -209,6 +234,13 @@ ALTER TABLE `tb_dosen`
 --
 ALTER TABLE `tb_jadwal`
   ADD PRIMARY KEY (`id_jadwal`);
+
+--
+-- Indexes for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  ADD PRIMARY KEY (`id_nilai`),
+  ADD KEY `fk_id_nilai_mhs` (`id_mahasiswa`);
 
 --
 -- Indexes for table `tb_pendaftaran`
@@ -238,25 +270,31 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `bimbingan`
 --
 ALTER TABLE `bimbingan`
-  MODIFY `id_bimbingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_bimbingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tb_jadwal`
 --
 ALTER TABLE `tb_jadwal`
-  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_pendaftaran`
 --
 ALTER TABLE `tb_pendaftaran`
-  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tb_request_mhs`
 --
 ALTER TABLE `tb_request_mhs`
-  MODIFY `id_request` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_request` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
@@ -268,6 +306,12 @@ ALTER TABLE `tb_request_mhs`
 ALTER TABLE `bimbingan`
   ADD CONSTRAINT `fk_id_dosen` FOREIGN KEY (`id_dosen`) REFERENCES `tb_dosen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_id_mahasiswa` FOREIGN KEY (`id_mahasiswa`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_nilai`
+--
+ALTER TABLE `tb_nilai`
+  ADD CONSTRAINT `fk_id_nilai_mhs` FOREIGN KEY (`id_mahasiswa`) REFERENCES `tb_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_request_mhs`
