@@ -51,16 +51,13 @@
                                 Penguji
                             </th>
                             <th class="bg-secondary text-center">
-                                Hari
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Bulan
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Tahun
+                                Tanggal
                             </th>
                             <th class="bg-secondary text-center">
                                 Jam
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Ruang
                             </th>
                             <th class="bg-secondary text-center">
                                 Aksi
@@ -85,16 +82,13 @@
                                     <?= $value['penguji']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['hari']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['bulan']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['tahun']; ?>
+                                    <?= $value['waktu']; ?>
                                 </td>
                                 <td class="text-center">
                                     <?= $value['jam']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['ruang']; ?>
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-warning btn-sm " href="#" data-toggle="modal" data-target="#edit<?= $value['id_jadwal'] ?>">
@@ -112,6 +106,7 @@
                         <?php  } ?>
                     </tbody>
                 </table>
+                <div class="text-cente mx-auto pl-2 pt-1 font-weight-bolder"><?= $halaman->Links() ?></div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -147,16 +142,13 @@
                                 Penguji
                             </th>
                             <th class="bg-secondary text-center">
-                                Hari
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Bulan
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Tahun
+                                Tanggal
                             </th>
                             <th class="bg-secondary text-center">
                                 Jam
+                            </th>
+                            <th class="bg-secondary text-center">
+                                Ruangan/Link
                             </th>
                             <th class="bg-secondary text-center">
                                 Aksi
@@ -178,19 +170,16 @@
                                     <?= $value['judul']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['penguji']; ?>
+                                    <?= $value['penguji']; ?> <?= '& ' . $value['penguji_2']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['hari']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['bulan']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['tahun']; ?>
+                                    <?= $value['waktu']; ?>
                                 </td>
                                 <td class="text-center">
                                     <?= $value['jam']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $value['ruang']; ?>
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-warning btn-sm " href="#" data-toggle="modal" data-target="#edit<?= $value['id_jadwal'] ?>">
@@ -208,6 +197,7 @@
                         <?php  } ?>
                     </tbody>
                 </table>
+                <div class="text-cente mx-auto pl-2 pt-1 font-weight-bolder"><?= $halaman->Links() ?></div>
             </div>
             <!-- /.card-body -->
         </div>
@@ -235,52 +225,33 @@ foreach ($jadwal as $key => $value) { ?>
                                 <label for="inputName">Judul</label>
                                 <input type="text" name="judul" class="form-control text-center" value="<?= $value['judul']; ?>">
                             </div>
-                            <label>Penguji</label>
+                            <label>Penguji 1 </label>
                             <select class="form-control" name="penguji">
                                 <option class="text-center"><?= $value['penguji']; ?></option>
                                 <?php foreach ($dosen as $c) : ?>
                                     <option class="text-center" value="<?= $c['nama_dosen'] ?>"><?= $c['nama_dosen'] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Hari</label>
-                            <select class="form-control" name="hari">
-                                <option class="text-center"><?= $value['hari']; ?></option>
-                                <option class="text-center" value="Senin">Senin</option>
-                                <option class="text-center" value="Selasa">Selasa</option>
-                                <option class="text-center" value="Rabu">Rabu</option>
-                                <option class="text-center" value="Kamis">Kamis</option>
-                                <option class="text-center" value="Jumat">Jumat</option>
-                                <option class="text-center" value="Sabtu">Sabtu</option>
-                                <option class="text-center" value="Minggu">Minggu</option>
+                            <label>Penguji 2 </label>
+                            <select class="form-control" name="penguji_2">
+                                <option class="text-center"><?= $value['penguji_2']; ?></option>
+                                <option class="text-center" value=""> - </option>
+                                <?php foreach ($dosen as $c) : ?>
+                                    <option class="text-center" value="<?= $c['nama_dosen'] ?>"><?= $c['nama_dosen'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Bulan</label>
-                            <select class="form-control" name="bulan">
-                                <option class="text-center"><?= $value['bulan']; ?></option>
-                                <option class="text-center" value="Januari">Januari</option>
-                                <option class="text-center" value="Februari">Februari</option>
-                                <option class="text-center" value="Maret">Maret</option>
-                                <option class="text-center" value="April">April</option>
-                                <option class="text-center" value="Mei">Mei</option>
-                                <option class="text-center" value="Juli">Juli</option>
-                                <option class="text-center" value="Juni">Juni</option>
-                                <option class="text-center" value="Agustus">Agustus</option>
-                                <option class="text-center" value="September">September</option>
-                                <option class="text-center" value="Oktober">Oktober</option>
-                                <option class="text-center" value="November">November</option>
-                                <option class="text-center" value="Desember">Desember</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputName">Tahun</label>
-                            <input type="number" name="tahun" class="form-control text-center" value="<?= $value['tahun']; ?>">
+                            <label for="inputName">Waktu</label>
+                            <input type="date" name="waktu" class="form-control text-center" value="<?= $value['waktu']; ?>">
                         </div>
                         <div class="form-group ">
                             <label for="inputName">Jam</label>
                             <input type="time" name="jam" class="form-control text-center" value="<?= $value['jam']; ?>">
+                        </div>
+                        <div class="form-group ">
+                            <label for="inputName">Ruangan/Link</label>
+                            <input type="text" name="ruang" class="form-control text-center" value="<?= $value['ruang']; ?>">
                         </div>
                     </div>
                     <div class="modal-footer">

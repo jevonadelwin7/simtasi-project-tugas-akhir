@@ -193,8 +193,20 @@ foreach ($nilai as $key => $value) { ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputName">Nilai</label>
-                            <input type="number" name="nilai" class="form-control text-center" value="<?= $value['nilai']; ?>">
+                            <label>Nilai</label>
+                            <select class="form-control" name="nilai">
+                                <option class="text-center"><?= $value['nilai']; ?></option>
+                                <option class="text-center" value="A">A</option>
+                                <option class="text-center" value="A-">A-</option>
+                                <option class="text-center" value="B+">B+</option>
+                                <option class="text-center" value="B">B</option>
+                                <option class="text-center" value="B-">B-</option>
+                                <option class="text-center" value="C+">C+</option>
+                                <option class="text-center" value="C">C</option>
+                                <option class="text-center" value="C-">C-</option>
+                                <option class="text-center" value="D">D</option>
+                                <option class="text-center" value="E">E</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

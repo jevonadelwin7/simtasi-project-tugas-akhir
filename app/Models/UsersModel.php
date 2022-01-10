@@ -102,6 +102,10 @@ class UsersModel extends Model
     {
         return $this->db->table('tb_pendaftaran')->where('id_mahasiswa', $idmhs)->where('jenis', 'skripsi')->get()->getResultArray();
     }
+    public function delete_pendaftaran($id_pendaftaran)
+    {
+        return $this->db->table('tb_pendaftaran')->where('id_pendaftaran', $id_pendaftaran)->delete();
+    }
     public function get_dosen()
     {
         return $this->db->table('tb_dosen')->get()->getResultArray();

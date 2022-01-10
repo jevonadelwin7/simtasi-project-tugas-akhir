@@ -44,13 +44,7 @@
                                 Penguji
                             </th>
                             <th class="bg-secondary text-center">
-                                Hari
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Bulan
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Tahun
+                                Tanggal
                             </th>
                             <th class="bg-secondary text-center">
                                 Jam
@@ -78,13 +72,7 @@
                                     <?= $value['penguji']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['hari']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['bulan']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['tahun']; ?>
+                                    <?= $value['waktu']; ?>
                                 </td>
                                 <td class="text-center">
                                     <?= $value['jam']; ?>
@@ -98,9 +86,11 @@
                 </table>
                 <div class="text-cente mx-auto pl-2 pt-1 font-weight-bolder"><?= $halaman->Links() ?></div>
             </div>
-            <!-- /.card-body -->
         </div>
 
-    </section>
-    <!-- /.content -->
+
+</div>
+
+</section>
+<!-- /.content -->
 </div>

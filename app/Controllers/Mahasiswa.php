@@ -193,10 +193,12 @@ class Mahasiswa extends BaseController
         if ($_POST['submit'] == 'kirim') {
             if (!$this->validate([
                 'berkas' => [
-                    'rules' => 'ext_in[berkas,rar,zip   ]|max_size[berkas,2048]',
+                    'rules' => 'required|ext_in[berkas,rar,zip]|max_size[berkas,2048]',
                     'errors' => [
+                        'required' => 'Wajib diisi & tidak boleh kosong',
                         'ext_in' => 'File Extention Harus Berupa .zip atau .rar',
-                        'max_size' => 'Ukuran File Maksimal 2 MB'
+                        'max_size' => 'Ukuran File Maksimal 2 MB',
+
                     ]
 
                 ]
@@ -258,16 +260,24 @@ class Mahasiswa extends BaseController
             return redirect()->back();
         }
     }
+    public function delete_pendaftaran($id_pendaftaran)
+    {
+        $berkaslama = $this->UsersModel->get_detail_pendaftaran($id_pendaftaran);
+        unlink('uploads/file_final/' . $berkaslama['file']);
+        $this->UsersModel->delete_pendaftaran($id_pendaftaran);
+        return redirect()->back();
+    }
 
     public function daftar_sidang()
     {
         if ($_POST['submit'] == 'kirim') {
             if (!$this->validate([
                 'berkas' => [
-                    'rules' => 'ext_in[berkas,rar,zip   ]|max_size[berkas,2048]',
+                    'rules' => 'ext_in[berkas,rar,zip]|max_size[berkas,2048]|required',
                     'errors' => [
                         'ext_in' => 'File Extention Harus Berupa .zip atau .rar',
-                        'max_size' => 'Ukuran File Maksimal 2 MB'
+                        'max_size' => 'Ukuran File Maksimal 2 MB',
+                        'required' => '{field} Wajib diisi & tidak boleh kosong'
                     ]
 
                 ]

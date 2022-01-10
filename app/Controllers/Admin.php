@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\DosenModel;
 use App\Models\NilaiModel;
+use App\Models\JadwalModel;
 
 class Admin extends BaseController
 {
@@ -48,6 +49,24 @@ class Admin extends BaseController
             echo view('errors/html/error_404');
         }
     }
+    public function daftar_mahasiswa()
+    {
+        $userModel = new \App\Models\DosenModel();
+        $loggedUserID = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedUserID);
+        if ($userInfo['role_id'] == 1) {
+            $data = [
+                'title' => 'Daftar Mahasiswa',
+                'isi' => 'admin/daftar_mahasiswa',
+                'daftar' => $this->DosenModel->daftar_mahasiswa(),
+                'judul' => 'Daftar Mahasiswa',
+                'userInfo' => $userInfo
+            ];
+            echo view('layout/template_admin', $data);
+        } else {
+            echo view('errors/html/error_404');
+        }
+    }
     public function tambah_dosen()
     {
         $userModel = new \App\Models\DosenModel();
@@ -84,6 +103,13 @@ class Admin extends BaseController
         } else {
             echo view('errors/html/error_404');
         }
+    }
+    public function delete_pendaftaran($id_pendaftaran)
+    {
+        $berkaslama = $this->DosenModel->get_detail_pendaftaran($id_pendaftaran);
+        unlink('uploads/file_final/' . $berkaslama['file']);
+        $this->DosenModel->delete_pendaftaran($id_pendaftaran);
+        return redirect()->to(base_url('admin/pendaftaran'));
     }
     public function isi_pendaftaran($id_pendaftaran)
     {
@@ -137,6 +163,8 @@ class Admin extends BaseController
 
     public function jadwal()
     {
+        $page = \Config\Services::pager();
+        $jadwal = new JadwalModel();
         $userModel = new \App\Models\DosenModel();
         $loggedUserID = session()->get('loggedUser');
         $userInfo = $userModel->find($loggedUserID);
@@ -147,8 +175,9 @@ class Admin extends BaseController
                 'judul' => 'Jadwal Seminar & Sidang',
                 'dosen' => $this->DosenModel->daftar_dosen(),
                 'jadwal' => $this->DosenModel->get_jadwal(),
-                'jadwal_seminar' => $this->DosenModel->get_jadwal_seminar(),
-                'jadwal_sidang' => $this->DosenModel->get_jadwal_sidang(),
+                'jadwal_seminar' => $jadwal->where('jenis', 'proposal')->paginate(10),
+                'jadwal_sidang' => $jadwal->where('jenis', 'skripsi')->paginate(10),
+                'halaman' => $jadwal->pager,
                 'userInfo' => $userInfo
 
             ];
@@ -162,10 +191,10 @@ class Admin extends BaseController
         $data = [
             'judul' => $this->request->getPost('judul'),
             'penguji' => $this->request->getPost('penguji'),
-            'hari' => $this->request->getPost('hari'),
-            'bulan' => $this->request->getPost('bulan'),
-            'tahun' => $this->request->getPost('tahun'),
+            'penguji_2' => $this->request->getPost('penguji_2'),
+            'waktu' => $this->request->getPost('waktu'),
             'jam' => $this->request->getPost('jam'),
+            'ruang' => $this->request->getPost('ruang'),
 
         ];
         $this->DosenModel->update_jadwal($data, $id_jadwal);
@@ -177,6 +206,7 @@ class Admin extends BaseController
         $this->DosenModel->delete_jadwal($id_jadwal);
         return redirect()->to(base_url('admin/jadwal'));
     }
+
     public function delete_dosen($id)
     {
         $this->DosenModel->delete_dosen($id);
@@ -217,12 +247,42 @@ class Admin extends BaseController
         $this->DosenModel->update_nilai($data, $id_nilai);
         return redirect()->to(base_url('admin/nilai_mahasiswa'));
     }
-    public function delete_niali($id_nilai)
+    public function delete_nilai($id_nilai)
     {
-        $this->DosenModel->delete_niali($id_nilai);
+        $this->DosenModel->delete_nilai($id_nilai);
         return redirect()->to(base_url('admin/nilai_mahasiswa'));
     }
+    public function profile_dosen($id)
+    {
+        $userModel = new \App\Models\DosenModel();
+        $loggedUserID = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedUserID);
+        if ($userInfo['role_id'] == 1) {
+            $data = [
+                'title' => 'Home',
+                'isi' => 'admin/profile',
+                'profile' => $this->DosenModel->detail_dosen($id),
+                'judul' => 'Profile Dosen',
+                'userInfo' => $userInfo
+            ];
+            echo view('layout/template_admin', $data);
+        } else {
+            echo view('errors/html/error_404');
+        }
+    }
+    public function update_profile($id)
+    {
 
+        $data = [
+            'id' => $this->request->getPost('id'),
+            'nama_dosen' => $this->request->getPost('nama_dosen'),
+            'email' => $this->request->getPost('email'),
+            'no_hp' => $this->request->getPost('no_hp'),
+            'role_id' => $this->request->getPost('role'),
+        ];
+        $this->DosenModel->update_profile($data, $id);
+        return redirect()->back();
+    }
 
     //------------------Menu Dosen--------------------------------
     public function request_mhs()

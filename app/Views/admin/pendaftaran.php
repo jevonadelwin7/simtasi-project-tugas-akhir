@@ -75,6 +75,11 @@
                                         </i>
                                         Lihat
                                     </a>
+                                    <a class="btn btn-danger btn-sm " href="<?= base_url('admin/delete_pendaftaran/' . $value['id_pendaftaran']) ?>">
+                                        <i class="far fa-trash-alt">
+                                        </i>
+                                        Hapus
+                                    </a>
                                 </td>
                             </tr>
                         <?php  } ?>

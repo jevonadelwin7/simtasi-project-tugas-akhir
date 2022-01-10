@@ -78,6 +78,9 @@
                                     <div class="card-footer text-center">
                                         <button type="submit" name="submit" value="kirim" class="btn btn-block btn-success">Kirim Kembali</button>
                                     </div>
+                                    <div class="card-footer text-center">
+                                        <a name="delete" href="<?= base_url('mahasiswa/delete_pendaftaran/' . $value['id_pendaftaran']) ?>" class="btn btn-block btn-danger">Hapus file yang telah terkirim</a>
+                                    </div>
                                 </form>
                             <?php  } ?>
                         </div>

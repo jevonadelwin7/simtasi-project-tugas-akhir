@@ -10,9 +10,17 @@ class DosenModel extends Model
     protected $primarykey = 'id';
     protected $allowedFields = ['id', 'nama_dosen', 'email', 'no_hp', 'info', 'password', 'role_id'];
 
+    public function detail_dosen($id)
+    {
+        return $this->db->table('tb_dosen')->where('id', $id)->get()->getresultArray();
+    }
     public function daftar_dosen()
     {
         return $this->db->table('tb_dosen')->where('role_id', '2')->get()->getresultArray();
+    }
+    public function daftar_mahasiswa()
+    {
+        return $this->db->table('tb_user')->get()->getresultArray();
     }
     //--------------------Model Pendaftaran--------------------------------------------------------------
     public function get_pendaftaran()
@@ -23,22 +31,22 @@ class DosenModel extends Model
     {
         return $this->db->table('tb_pendaftaran')->where('id_pendaftaran', $id_pendaftaran)->get()->getresultArray();
     }
+    public function get_detail_pendaftaran($id_pendaftaran)
+    {
+        return $this->db->table('tb_pendaftaran')->where('id_pendaftaran', $id_pendaftaran)->get()->getRowArray();
+    }
     public function update_pendaftaran($datax, $id_pendaftaran)
     {
         return $this->db->table('tb_pendaftaran')->update($datax, array('id_pendaftaran' => $id_pendaftaran));
+    }
+    public function delete_pendaftaran($id_pendaftaran)
+    {
+        return $this->db->table('tb_pendaftaran')->where('id_pendaftaran', $id_pendaftaran)->delete();
     }
     //--------------------Model Pendaftaran--------------------------------------------------------------
     public function insert_jadwal($data)
     {
         return $this->db->table('tb_jadwal')->insert($data);
-    }
-    public function get_jadwal_seminar()
-    {
-        return $this->db->table('tb_jadwal')->where('jenis', 'proposal')->get()->getresultArray();
-    }
-    public function get_jadwal_sidang()
-    {
-        return $this->db->table('tb_jadwal')->where('jenis', 'skripsi')->get()->getresultArray();
     }
     public function get_jadwal()
     {
@@ -143,5 +151,9 @@ class DosenModel extends Model
     public function update_bimbingan($data, $id_bimbingan)
     {
         return $this->db->table('bimbingan')->update($data, array('id_bimbingan' => $id_bimbingan));
+    }
+    public function update_profile($data, $id)
+    {
+        return $this->db->table('tb_dosen')->update($data, array('id' => $id));
     }
 }

@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('admin/daftar_dosen') ?>" class="nav-link">
+                    <a href="<?= base_url('admin/daftar_mahasiswa') ?>" class="nav-link">
                         <i class="fas fa-user-graduate nav-icon"></i>
                         <p>Daftar Mahasiswa</p>
                     </a>

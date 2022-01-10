@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-right">
-                                            <a href="<?= base_url('mahasiswa/request_bimbingan_proposal/' . $value['id']) ?>" class="btn btn-sm bg-warning">
+                                            <a href="<?= base_url('admin/profile_dosen/' . $value['id']) ?>" class="btn btn-sm bg-warning">
                                                 Edit
                                             </a>
                                             <a href="<?= base_url('admin/delete_dosen/' . $value['id']) ?>" class="btn btn-sm bg-danger">

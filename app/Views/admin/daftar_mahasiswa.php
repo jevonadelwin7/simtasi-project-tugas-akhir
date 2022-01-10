@@ -1,10 +1,17 @@
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Jadwal Seminar</h1>
+                    <h1>Daftar Mahasiswa</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Projects</li>
+                    </ol>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -35,62 +42,47 @@
                                 No
                             </th>
                             <th class="bg-secondary text-center">
+                                ID
+                            </th>
+                            <th class="bg-secondary text-center">
                                 Nama Mahasiswa
                             </th>
                             <th class="bg-secondary text-center">
-                                Judul
+                                email
                             </th>
                             <th class="bg-secondary text-center">
-                                Penguji
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Tanggal
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Jam
-                            </th>
-                            <th class="bg-secondary text-center">
-                                Ruangan / Link
+                                no_hp
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $i = 1;
-                        foreach ($jadwal as $key => $value) { ?>
+                        foreach ($daftar as $key => $value) { ?>
                             <tr>
                                 <td class="text-center">
                                     <?= $i++; ?>.
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['mahasiswa']; ?>
+                                    <?= $value['id']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['judul']; ?>
+                                    <?= $value['nama_user']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['penguji']; ?>
+                                    <?= $value['email']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?= $value['waktu']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['jam']; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?= $value['ruang']; ?>
+                                    <?= $value['no_hp']; ?>
                                 </td>
                             </tr>
                         <?php  } ?>
                     </tbody>
                 </table>
-                <div class="text-cente mx-auto pl-2 pt-1 font-weight-bolder"><?= $halaman->Links() ?></div>
+
             </div>
+            <!-- /.card-body -->
         </div>
-
-
-</div>
-
-</section>
-<!-- /.content -->
+    </section>
+    <!-- /.content -->
 </div>
