@@ -1,3 +1,8 @@
+# Sistem Informasi Manajemen Tugas Akhir
+
+my college final year project. This web-app created with Codeigniter 4 and AdminLTE.
+
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
